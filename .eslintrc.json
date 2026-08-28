@@ -100,7 +100,8 @@
                         "selector": "variable",
                         "format": [
                             "camelCase",
-                            "UPPER_CASE"
+                            "UPPER_CASE",
+                            "PascalCase"
                         ]
                     },
                     {
@@ -151,6 +152,23 @@
                     },
                     {
                         "selector": "objectLiteralProperty",
+                        "format": null
+                    },
+                    {
+                        "selector": "function",
+                        "format": [
+                            "camelCase",
+                            "PascalCase"
+                        ]
+                    },
+                    {
+                        "selector": "enumMember",
+                        "format": [
+                            "PascalCase"
+                        ]
+                    },
+                    {
+                        "selector": "typeProperty",
                         "format": null
                     }
                 ]
