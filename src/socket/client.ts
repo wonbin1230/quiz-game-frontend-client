@@ -5,7 +5,8 @@ import { useSessionStore } from '../stores/sessionStore';
 import { useGameStore } from '../stores/gameStore';
 import { useRoomStore } from '../stores/roomStore';
 import { usePlayerStore } from '../stores/playerStore';
-import { loadPersistedUserId } from '../constants/storage';
+import { clampNickname } from '../constants/nickname';
+import { loadPersistedUserId, persistUserId } from '../constants/storage';
 
 const host = import.meta.env.VITE_SERVER_SOCKET_URL;
 const port = import.meta.env.VITE_SERVER_SOCKET_PORT;
@@ -14,13 +15,14 @@ const socketUrl = host.includes('://') ? `${host}:${port}` : `http://${host}:${p
 let clientIO: Socket | null = null;
 
 export const HydratePersistedUser = () => {
-	const userId = loadPersistedUserId();
+	const userId = clampNickname(loadPersistedUserId());
 	if (!userId) {
 		return;
 	}
 
 	usePlayerStore.getState().setUserId(userId);
 	usePlayerStore.getState().setNicknameDraft(userId);
+	persistUserId(userId);
 };
 
 export const ExitRoomToLobby = () => {
@@ -28,6 +30,7 @@ export const ExitRoomToLobby = () => {
 	useSessionStore.getState().setPendingJoin(false);
 	useSessionStore.getState().setIsReconnecting(false);
 	useSessionStore.getState().setAwaitingSnapshot(false);
+	useSessionStore.getState().setRenameLocked(false);
 	useGameStore.getState().resetRound();
 	useRoomStore.getState().reset();
 	usePlayerStore.getState().resetSession();

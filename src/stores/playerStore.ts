@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 
+import { clampNickname } from '../constants/nickname';
 import type { IPersonalResult, RevealFeedback } from '../types/game';
 
 interface PlayerStore {
@@ -36,7 +37,7 @@ export const usePlayerStore = create<PlayerStore>((set) => ({
 	feedback: null,
 	personalResult: null,
 	setUserId: (userId: string) => set({ userId }),
-	setNicknameDraft: (nicknameDraft: string) => set({ nicknameDraft }),
+	setNicknameDraft: (nicknameDraft: string) => set({ nicknameDraft: clampNickname(nicknameDraft) }),
 	setSelectedOption: (selectedOption: number) => set({ selectedOption }),
 	setSubmitted: (submitted: boolean) => set({ submitted }),
 	setSubmitting: (submitting: boolean) => set({ submitting }),

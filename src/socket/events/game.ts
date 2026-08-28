@@ -11,8 +11,11 @@ import type {
 	IServerSubmitAnswer,
 } from '../../types/server-response';
 import { GamePhase } from '../../types/game';
+import { RoomState } from '../../types/room';
 import { useGameStore } from '../../stores/gameStore';
 import { usePlayerStore } from '../../stores/playerStore';
+import { useRoomStore } from '../../stores/roomStore';
+import { useSessionStore } from '../../stores/sessionStore';
 
 export const SubmitAnswer = (optionIndex: number) => {
 	usePlayerStore.getState().setSubmitting(true);
@@ -29,6 +32,9 @@ export const OnSubmitAnswer = () => {
 
 export const OnGameStarted = () => {
 	GetSocket().on('QuizGame:GameStarted', (data: IServerStartGame) => {
+		useRoomStore.getState().setRoomState(RoomState.InGame);
+		useSessionStore.getState().setRenameLocked(true);
+		usePlayerStore.getState().setNicknameDraft(usePlayerStore.getState().userId);
 		useGameStore.getState().resetRound();
 		useGameStore.getState().setQuizCount(data.quizCount);
 		useGameStore.getState().setPhase(GamePhase.Lobby);
@@ -92,6 +98,7 @@ export const OnPersonalResult = () => {
 
 export const OnFinished = () => {
 	GetSocket().on('QuizGame:Finished', (_data: IServerGameFinished) => {
+		useRoomStore.getState().setRoomState(RoomState.Finished);
 		useGameStore.getState().setPhase(GamePhase.Finished);
 	});
 };

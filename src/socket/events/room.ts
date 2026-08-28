@@ -24,6 +24,7 @@ export const OnJoinRoom = () => {
 		useRoomStore.getState().setRoomState(RoomState.Prepare);
 		useSessionStore.getState().setPendingJoin(false);
 		useSessionStore.getState().setIsReconnecting(false);
+		useSessionStore.getState().setRenameLocked(false);
 		useSessionStore.getState().setState(SessionState.InRoom);
 		useGameStore.getState().resetRound();
 		usePlayerStore.getState().resetSession();

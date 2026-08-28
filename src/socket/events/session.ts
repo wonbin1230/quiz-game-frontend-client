@@ -3,6 +3,7 @@ import { ExitRoomToLobby, GetSocket } from '../client';
 import type { IServerSessionSnapshot, IServerSessionSnapshotIn } from '../../types/server-response';
 import { GamePhase, GameState, type IQuestionData, type RevealFeedback } from '../../types/game';
 import { SessionState } from '../../types/session';
+import { RoomState } from '../../types/room';
 import { useSessionStore } from '../../stores/sessionStore';
 import { useRoomStore } from '../../stores/roomStore';
 import { useGameStore } from '../../stores/gameStore';
@@ -108,6 +109,9 @@ const applyInRoomSnapshot = (data: IServerSessionSnapshotIn) => {
 			}
 			: null,
 	});
+	const canRenameHere =
+		data.roomState === RoomState.Prepare && data.gameState === GameState.Prepare;
+	useSessionStore.getState().setRenameLocked(!canRenameHere);
 	useNoticeStore.getState().clear();
 };
 

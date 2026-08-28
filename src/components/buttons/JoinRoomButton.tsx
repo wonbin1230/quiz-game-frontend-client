@@ -7,6 +7,7 @@ import { SessionState } from '../../types/session';
 import { UserLogin } from '../../socket/events/login';
 import { JoinRoom } from '../../socket/events/room';
 import { COPY } from '../../constants/copy';
+import { normalizeNickname } from '../../constants/nickname';
 import GameButton from './GameButton';
 
 const JoinRoomButton = () => {
@@ -17,7 +18,7 @@ const JoinRoomButton = () => {
 	const nicknameDraft = usePlayerStore((s) => s.nicknameDraft);
 	const userId = usePlayerStore((s) => s.userId);
 
-	const name = (session === SessionState.LoggedIn ? userId : nicknameDraft).trim();
+	const name = normalizeNickname(nicknameDraft);
 	const connected =
 		session === SessionState.ServerConnected || session === SessionState.LoggedIn;
 	const canJoin =
@@ -40,7 +41,9 @@ const JoinRoomButton = () => {
 			return;
 		}
 
-		UserLogin(name);
+		if (!UserLogin(name)) {
+			useSessionStore.getState().setPendingJoin(false);
+		}
 	};
 
 	return (

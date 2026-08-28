@@ -7,6 +7,11 @@ export const OPTION_LABELS = ['A', 'B', 'C', 'D'] as const;
 export const COPY = {
 	joinCta: '參加婚禮',
 	nicknamePlaceholder: '你的名字',
+	nicknameMaxHint: '最多6個字',
+	nicknameConfirm: '確認名字',
+	nicknameTaken: '此名已有嘉賓使用',
+	nicknameLocked: '婚禮已開始，無法更名',
+	nicknameInvalid: '請使用有效的名字',
 	waitingTitle: '婚禮即將開始',
 	waitingSubtitle: '等待新人宣布開始',
 	startSoon: '讓我們開始吧',
