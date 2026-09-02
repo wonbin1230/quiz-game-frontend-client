@@ -22,7 +22,7 @@ const Lobby = () => {
 			<div className='flex h-full min-h-0 flex-col'>
 				<div className='flex min-h-0 flex-1 flex-col items-center justify-center gap-6 px-2'>
 					<img
-						src='/yuyu.png'
+						src={`${import.meta.env.BASE_URL}yuyu.png`}
 						alt=''
 						className='w-10/12 object-contain'
 					/>
