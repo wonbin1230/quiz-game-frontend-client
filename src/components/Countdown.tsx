@@ -15,17 +15,6 @@ const Countdown = () => {
 		const clientNow = Date.now();
 
 		if (phaseEndsAt) {
-			const deltaMs = phaseEndsAt - clientNow;
-			console.log('[countdown]', {
-				questionIndex,
-				votingTime,
-				phaseEndsAt,
-				clientNow,
-				deltaMs,
-				remainingSeconds: Math.ceil(deltaMs / 1000),
-				clockSkewMs: deltaMs - votingTime * 1000,
-			});
-
 			const tick = () => {
 				setSecond(remainingSeconds(phaseEndsAt));
 			};
@@ -34,12 +23,6 @@ const Countdown = () => {
 			const timer = setInterval(tick, 200);
 			return () => clearInterval(timer);
 		}
-
-		console.log('[countdown] no phaseEndsAt', {
-			questionIndex,
-			votingTime,
-			clientNow,
-		});
 
 		if (votingTime <= 0) {
 			setSecond(-1);
