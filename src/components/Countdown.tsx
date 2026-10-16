@@ -7,6 +7,7 @@ const remainingSeconds = (phaseEndsAt: number) => Math.ceil((phaseEndsAt - Date.
 
 const Countdown = () => {
 	const votingTime = useGameStore((s) => s.question.votingTime);
+  console.log(votingTime);
 	const questionIndex = useGameStore((s) => s.question.questionIndex);
 	const phaseEndsAt = useGameStore((s) => s.phaseEndsAt);
 	const [second, setSecond] = useState(-1);
