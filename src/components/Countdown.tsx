@@ -12,8 +12,6 @@ const Countdown = () => {
 	const [second, setSecond] = useState(-1);
 
 	useEffect(() => {
-		const clientNow = Date.now();
-
 		if (phaseEndsAt) {
 			const tick = () => {
 				setSecond(remainingSeconds(phaseEndsAt));
