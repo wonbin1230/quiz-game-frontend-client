@@ -13,8 +13,8 @@ import Notice from './Notice';
 const WaitingStart = () => {
 	const phase = useGameStore((s) => s.phase);
 	const started = phase === GamePhase.Lobby;
-	const title = started ? COPY.startSoon : COPY.waitingTitle;
-	const displayText = useTypingText(title, 100);
+	// 「讓我們開始吧」改由 StartGameIntro 在 GameStarted 後播放，這裡維持等待文案。
+	const displayText = useTypingText(COPY.waitingTitle, 100);
 	const renameUi = useRenameUi();
 
 	return (

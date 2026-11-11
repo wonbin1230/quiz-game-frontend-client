@@ -9,6 +9,8 @@ const OptionArea = () => {
 	const question = useGameStore((s) => s.question);
 	const selectedOption = usePlayerStore((s) => s.selectedOption);
 	const submitted = usePlayerStore((s) => s.submitted);
+	const submitting = usePlayerStore((s) => s.submitting);
+	const locked = submitted || submitting;
 
 	return (
 		<div className='min-h-0 flex-[4]'>
@@ -20,9 +22,9 @@ const OptionArea = () => {
 						text={opt}
 						highlighted={selectedOption === index}
 						dimmed={submitted && selectedOption !== index}
-						disabled={submitted}
+						disabled={locked}
 						onSelect={() => {
-							if (!submitted) {
+							if (!locked) {
 								usePlayerStore.getState().setSelectedOption(index);
 							}
 						}}
