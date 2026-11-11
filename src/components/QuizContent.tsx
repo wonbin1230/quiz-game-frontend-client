@@ -5,6 +5,7 @@ import { useGameStore } from '../stores/gameStore';
 import { SessionState } from '../types/session';
 import { GamePhase } from '../types/game';
 import { COPY } from '../constants/copy';
+import { useAutoSubmitAnswer } from '../hooks/useAutoSubmitAnswer';
 
 import Question from './Question';
 import OptionArea from './OptionArea';
@@ -17,6 +18,7 @@ import Notice from './Notice';
 import StageFrame from './StageFrame';
 
 const QuizContent = () => {
+	useAutoSubmitAnswer();
 	const session = useSessionStore((s) => s.state);
 	const isReconnecting = useSessionStore((s) => s.isReconnecting);
 	const phase = useGameStore((s) => s.phase);

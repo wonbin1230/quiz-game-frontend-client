@@ -9,6 +9,7 @@ import './App.css';
 import QuizGame from './pages/QuizGame';
 import Lobby from './components/Lobby';
 import LightRays from './components/backgrounds/LightRays';
+import StartGameIntro from './components/transitions/StartGameIntro';
 
 const App = () => {
 	const session = useSessionStore((s) => s.state);
@@ -41,6 +42,7 @@ const App = () => {
 			<div className='relative z-10'>
 				{inRoom ? <QuizGame /> : <Lobby />}
 			</div>
+			<StartGameIntro />
 		</div>
 	);
 };

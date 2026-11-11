@@ -19,6 +19,8 @@ export const COPY = {
 	waitingReveal: '靜候揭曉',
 	correct: '心有靈犀',
 	wrong: '緣分未至',
+	yourPick: '你的選擇',
+	noAnswer: '尚未許下答案',
 	rankingTitle: '幸福排行榜',
 	finished: '已圓滿結束',
 	connecting: '緣分連線中',

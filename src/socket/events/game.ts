@@ -16,8 +16,14 @@ import { useGameStore } from '../../stores/gameStore';
 import { usePlayerStore } from '../../stores/playerStore';
 import { useRoomStore } from '../../stores/roomStore';
 import { useSessionStore } from '../../stores/sessionStore';
+import { useStartIntroStore } from '../../stores/startIntroStore';
 
 export const SubmitAnswer = (optionIndex: number) => {
+	const { submitted, submitting } = usePlayerStore.getState();
+	if (submitted || submitting) {
+		return;
+	}
+
 	usePlayerStore.getState().setSubmitting(true);
 	GetSocket().emit('UserGame:SubmitAnswer', { optionIndex });
 };
@@ -40,6 +46,7 @@ export const OnGameStarted = () => {
 		useGameStore.getState().setPhase(GamePhase.Lobby);
 		useGameStore.getState().setPhaseEndsAt(data.phaseEndsAt ?? null);
 		usePlayerStore.getState().resetSession();
+		useStartIntroStore.getState().play();
 	});
 };
 
@@ -53,6 +60,7 @@ export const OnGetQuestion = () => {
 			votingTime: data.votingTime,
 			totalQuestions: data.totalQuestions,
 		}, data.phaseEndsAt ?? null);
+		useStartIntroStore.getState().startReveal();
 	});
 };
 
