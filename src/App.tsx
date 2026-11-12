@@ -8,8 +8,11 @@ import { useSessionStore } from './stores/sessionStore';
 import './App.css';
 import QuizGame from './pages/QuizGame';
 import Lobby from './components/Lobby';
-import LightRays from './components/backgrounds/LightRays';
 import StartGameIntro from './components/transitions/StartGameIntro';
+import PortraitLock from './components/PortraitLock';
+import { ANSWER_ROSE_LAYER_ID } from './components/AnswerRose';
+
+const BACKGROUND_URL = `${import.meta.env.BASE_URL}background.png`;
 
 const App = () => {
 	const session = useSessionStore((s) => s.state);
@@ -21,28 +24,24 @@ const App = () => {
 	}, []);
 
 	return (
-		<div className='relative min-h-screen overflow-hidden bg-black'>
-			<div className='pointer-events-none absolute inset-0 z-0'>
-				<LightRays
-					raysOrigin='top-center'
-					raysColor='#ffffff'
-					raysSpeed={1}
-					lightSpread={2}
-					rayLength={3}
-					followMouse={false}
-					mouseInfluence={0}
-					noiseAmount={0}
-					distortion={0}
-					className='custom-rays'
-					fadeDistance={2}
-					saturation={2}
-				/>
-			</div>
+		<div className='relative min-h-screen overflow-hidden bg-paper text-ink'>
+			<div
+				className='pointer-events-none absolute inset-0 z-0'
+				aria-hidden
+				style={{
+					backgroundImage: `url(${BACKGROUND_URL})`,
+					backgroundSize: '100% 100%',
+					backgroundPosition: 'center',
+					backgroundRepeat: 'no-repeat',
+				}}
+			/>
+			<div id={ANSWER_ROSE_LAYER_ID} className='pointer-events-none absolute inset-0 z-30 overflow-visible' />
 
 			<div className='relative z-10'>
 				{inRoom ? <QuizGame /> : <Lobby />}
 			</div>
 			<StartGameIntro />
+			<PortraitLock />
 		</div>
 	);
 };

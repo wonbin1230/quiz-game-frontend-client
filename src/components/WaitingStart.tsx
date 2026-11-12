@@ -20,11 +20,11 @@ const WaitingStart = () => {
 	return (
 		<div className='flex h-full min-h-0 flex-col'>
 			<div className='flex min-h-0 flex-1 flex-col items-center justify-center gap-4 px-4 text-center'>
-				<div className='text-2xl tracking-[0.15em] text-white/90 sm:text-4xl'>
+				<div className='text-2xl font-bold tracking-[0.15em] text-ink sm:text-4xl'>
 					{displayText}
 				</div>
 				{!started && (
-					<div className='text-sm tracking-[0.2em] text-white/55 sm:text-lg'>
+					<div className='text-sm tracking-[0.2em] text-ink/55 sm:text-lg'>
 						{COPY.waitingSubtitle}
 					</div>
 				)}

@@ -1,5 +1,7 @@
 import React, { type ReactNode } from 'react';
 
+import QuestionProgress from './QuestionProgress';
+
 interface IStageFrameProps {
 	children: ReactNode,
 }
@@ -7,6 +9,7 @@ interface IStageFrameProps {
 const StageFrame = ({ children }: IStageFrameProps) => {
 	return (
 		<div className='relative flex h-[100dvh] min-h-[100dvh] flex-col pb-[env(safe-area-inset-bottom)]'>
+			<QuestionProgress />
 			<div className='relative flex h-full items-center justify-center p-2 sm:p-8'>
 				<div className='relative flex h-full min-h-0 w-full max-w-md flex-col gap-2 overflow-hidden p-2 sm:w-[70%] sm:max-w-none sm:p-4'>
 					{children}

@@ -32,4 +32,5 @@ export const COPY = {
 	rankPrefix: '第',
 	rankSuffix: '名',
 	correctUnit: '題',
+	rotatePortrait: '請將手機轉為直向',
 } as const;

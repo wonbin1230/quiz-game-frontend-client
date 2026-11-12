@@ -1,28 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import Option from './Option';
-import AnswerStamp, { ANSWER_STAMP_DURATION } from './AnswerStamp';
+import AnswerRose, { ANSWER_ROSE_DURATION } from './AnswerRose';
 import { useGameStore } from '../stores/gameStore';
 import { usePlayerStore } from '../stores/playerStore';
 import { COPY, OPTION_LABELS, ROMANTIC_EASE } from '../constants/copy';
 import { GamePhase } from '../types/game';
 
-const YourPickMark = () => (
-	<motion.div
-		className='pointer-events-none absolute left-2 top-2 z-20'
-		initial={{ opacity: 0, y: -6 }}
-		animate={{ opacity: 1, y: 0 }}
-		transition={{ duration: 0.45, ease: ROMANTIC_EASE }}
-	>
-		<span
-			className='inline-flex items-center rounded-sm border border-amber-200/70 bg-black/60 px-1.5 py-0.5 text-[11px] font-semibold tracking-[0.16em] text-amber-100'
-			style={{ fontFamily: '"Noto Serif TC", "Songti TC", "SimSun", serif' }}
-		>
-			{COPY.yourPick}
-		</span>
-	</motion.div>
-);
+const CORRECT_SRC = `${import.meta.env.BASE_URL}correct.png`;
+const CHOICE_SRC = `${import.meta.env.BASE_URL}choice.png`;
 
 const RevealOptions = () => {
 	const question = useGameStore((s) => s.question);
@@ -31,14 +18,23 @@ const RevealOptions = () => {
 	const selectedOption = usePlayerStore((s) => s.selectedOption);
 	const submitted = usePlayerStore((s) => s.submitted);
 	const feedback = usePlayerStore((s) => s.feedback);
+	const [showFrame, setShowFrame] = useState(false);
 
 	const revealed = phase === GamePhase.ShowAnswer && answerReveal !== null;
 
+	useEffect(() => {
+		if (!revealed) {
+			setShowFrame(false);
+			return;
+		}
+
+		setShowFrame(false);
+		const timer = window.setTimeout(() => setShowFrame(true), ANSWER_ROSE_DURATION * 1000);
+		return () => window.clearTimeout(timer);
+	}, [revealed, question.questionIndex, answerReveal?.correctAnswer]);
+
 	return (
-		<div className='flex min-h-0 flex-1 flex-col gap-4'>
-			<div className='text-center text-xs tracking-[0.2em] text-white/45'>
-				{question.questionIndex} / {question.totalQuestions}
-			</div>
+		<div className='flex min-h-0 flex-1 flex-col gap-4 pt-14!'>
 			<div className='min-h-0 flex-1'>
 				<div className='grid h-full w-full grid-cols-2 grid-rows-2 gap-2'>
 					{question.options.map((opt, index) => {
@@ -49,17 +45,38 @@ const RevealOptions = () => {
 						return (
 							<div
 								key={OPTION_LABELS[index] ?? index}
-								className={`relative h-full min-h-0 ${isCorrect || showPick ? 'z-10 overflow-visible' : 'overflow-hidden'}`}
+								className={`relative h-full min-h-0 overflow-visible ${isCorrect || showPick ? 'z-10' : 'z-0'}`}
 							>
 								<Option
 									label={OPTION_LABELS[index] ?? String(index + 1)}
 									text={opt}
-									highlighted={revealed ? isCorrect : isSelected}
 									picked={showPick && !isCorrect}
 									dimmed={revealed && !isCorrect && !isSelected}
+									showAnswerFrame={showFrame && isCorrect}
 								/>
-								{isCorrect && <AnswerStamp active />}
-								{showPick && <YourPickMark />}
+								{isCorrect && (
+									<motion.img
+										src={CORRECT_SRC}
+										alt='正確答案'
+										draggable={false}
+										className='pointer-events-none absolute left-1/2 top-0 z-40 w-[27%] max-w-[115px] -translate-x-1/2 -translate-y-[30%] select-none'
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										transition={{ duration: 0.9, ease: 'easeOut', delay: ANSWER_ROSE_DURATION * 0.6 }}
+									/>
+								)}
+								{showPick && (
+									<motion.img
+										src={CHOICE_SRC}
+										alt={COPY.yourPick}
+										draggable={false}
+										className='pointer-events-none absolute bottom-0 left-1/2 z-30 w-[42%] max-w-[140px] -translate-x-1/2 translate-y-[22%] select-none'
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										transition={{ duration: 0.45, ease: 'easeOut' }}
+									/>
+								)}
+								{isCorrect && <AnswerRose active />}
 							</div>
 						);
 					})}
@@ -68,11 +85,11 @@ const RevealOptions = () => {
 			<div className='flex h-14 shrink-0 items-center justify-center'>
 				{revealed && !submitted ? (
 					<motion.div
-						className='text-lg tracking-[0.35em] text-white/80'
+						className='text-lg font-bold tracking-[0.35em] text-ink'
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{
-							delay: ANSWER_STAMP_DURATION,
+							delay: ANSWER_ROSE_DURATION,
 							duration: 1,
 							ease: ROMANTIC_EASE,
 						}}
@@ -81,11 +98,11 @@ const RevealOptions = () => {
 					</motion.div>
 				) : revealed && feedback ? (
 					<motion.div
-						className='text-lg tracking-[0.35em] text-white/80'
+						className='text-lg font-bold tracking-[0.35em] text-ink'
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{
-							delay: ANSWER_STAMP_DURATION,
+							delay: ANSWER_ROSE_DURATION,
 							duration: 1,
 							ease: ROMANTIC_EASE,
 						}}
@@ -93,7 +110,7 @@ const RevealOptions = () => {
 						{feedback === 'correct' ? COPY.correct : COPY.wrong}
 					</motion.div>
 				) : (
-					<div className='text-lg tracking-[0.35em] text-white/80'>
+					<div className='text-lg font-bold tracking-[0.35em] text-ink'>
 						{COPY.waitingReveal}
 					</div>
 				)}

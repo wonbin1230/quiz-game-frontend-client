@@ -57,7 +57,7 @@ const StartGameIntro = () => {
 			aria-hidden
 		>
 			<motion.div
-				className='absolute inset-0 bg-black'
+				className='absolute inset-0 bg-paper'
 				initial={{ opacity: 0 }}
 				animate={{ opacity: covering ? 1 : 0 }}
 				transition={{
@@ -69,7 +69,7 @@ const StartGameIntro = () => {
 			{showText && (
 				<div className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4'>
 					<motion.div
-						className='text-center text-2xl tracking-[0.15em] text-white/90 sm:text-4xl'
+						className='text-center text-2xl font-bold tracking-[0.15em] text-gold sm:text-4xl'
 						initial={{ opacity: 1 }}
 						animate={{ opacity: covering ? 1 : 0 }}
 						transition={{

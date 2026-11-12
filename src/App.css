@@ -1,1 +1,53 @@
 @import "tailwindcss";
+
+/* 喜帖：奶油紙、金棕、裸粉、淡紫 */
+@theme {
+	--color-paper: #fbf6ef;
+	--color-ink: #4e463f;
+	--color-gold: #9a7344;
+	--color-blush: #e7b4be;
+	--color-rose: #a56b78;
+	--color-lilac: #cbb6dc;
+}
+
+/* 揭曉答案的百合：以花莖底部為支點，左右隨風搖擺 */
+@keyframes answer-flower-wind {
+	0% { transform: rotate(-9deg); }
+	20% { transform: rotate(13deg); }
+	42% { transform: rotate(-6deg); }
+	63% { transform: rotate(11deg); }
+	82% { transform: rotate(-10deg); }
+	100% { transform: rotate(-9deg); }
+}
+
+.answer-flower-wind {
+	transform-origin: 47.48% 97.83%;
+	animation: answer-flower-wind 2.15s ease-in-out infinite;
+}
+
+/* 正確選項：百合淡出後才開始的玫瑰粉呼吸框 */
+@keyframes answer-frame-glow {
+	0%, 100% {
+		box-shadow:
+			0 0 0 1px rgba(201, 137, 150, 0.35),
+			0 0 10px rgba(231, 180, 190, 0.28);
+	}
+	50% {
+		box-shadow:
+			0 0 0 3px rgba(201, 137, 150, 0.7),
+			0 0 22px rgba(231, 180, 190, 0.55);
+	}
+}
+
+@keyframes answer-frame-ring {
+	0%, 100% { opacity: 0.25; }
+	50% { opacity: 0.7; }
+}
+
+.answer-frame-glow {
+	animation: answer-frame-glow 1.5s ease-in-out infinite;
+}
+
+.answer-frame-ring {
+	animation: answer-frame-ring 1.5s ease-in-out infinite;
+}
