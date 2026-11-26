@@ -35,7 +35,7 @@ const Lobby = () => {
 						}}
 					/>
 					{connecting && (
-						<p className='text-sm tracking-[0.2em] text-white/50'>
+						<p className='text-sm tracking-[0.2em] text-ink/50'>
 							{COPY.connecting}
 						</p>
 					)}

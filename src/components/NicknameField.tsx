@@ -37,10 +37,10 @@ const NicknameField = ({
 				maxLength={NICKNAME_MAX_LENGTH}
 				placeholder={COPY.nicknamePlaceholder}
 				autoComplete='nickname'
-				className='w-full rounded-sm border border-white/25 bg-white/5 px-4 py-3.5 text-center text-lg tracking-[0.15em] text-white/90 outline-none backdrop-blur-sm placeholder:text-white/35 focus:border-white/50 disabled:opacity-60'
+				className='w-full rounded-xl border border-blush/80 bg-white/70 px-4 py-3.5 text-center text-lg tracking-[0.15em] text-ink outline-none backdrop-blur-sm placeholder:text-ink/35 focus:border-gold disabled:opacity-60'
 			/>
 			<p
-				className={`mt-2 text-sm tracking-[0.2em] text-white/50 ${atNicknameLimit ? 'visible' : 'invisible'}`}
+				className={`mt-2 text-sm tracking-[0.2em] text-ink/50 ${atNicknameLimit ? 'visible' : 'invisible'}`}
 			>
 				{COPY.nicknameMaxHint}
 			</p>
@@ -48,7 +48,7 @@ const NicknameField = ({
 				type='button'
 				onClick={onConfirm}
 				disabled={confirmDisabled}
-				className={`mt-1 text-sm tracking-[0.2em] text-white/70 hover:enabled:text-white disabled:opacity-35 ${showConfirm ? 'visible' : 'invisible'}`}
+				className={`mt-1 text-sm tracking-[0.2em] text-gold hover:enabled:text-ink disabled:text-gold/55 ${showConfirm ? 'visible' : 'invisible'}`}
 			>
 				{COPY.nicknameConfirm}
 			</button>

@@ -22,7 +22,7 @@ const SubmitAnswerButton = () => {
 
 	if (submitted) {
 		return (
-			<div className='text-lg tracking-[0.35em] text-white/80'>
+			<div className='text-lg font-bold tracking-[0.35em] text-ink'>
 				{COPY.waitingReveal}
 			</div>
 		);

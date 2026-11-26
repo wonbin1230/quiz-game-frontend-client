@@ -9,7 +9,6 @@ import { useAutoSubmitAnswer } from '../hooks/useAutoSubmitAnswer';
 
 import Question from './Question';
 import OptionArea from './OptionArea';
-import Countdown from './Countdown';
 import WaitingStart from './WaitingStart';
 import RevealOptions from './RevealOptions';
 import PersonalResult from './PersonalResult';
@@ -36,8 +35,8 @@ const QuizContent = () => {
 	return (
 		<>
 			{isReconnecting && (
-				<div className='absolute inset-0 z-30 flex items-center justify-center bg-black/60'>
-					<p className='text-sm tracking-[0.2em] text-white/70 sm:text-lg'>
+				<div className='absolute inset-0 z-30 flex items-center justify-center bg-paper/80'>
+					<p className='text-sm font-bold tracking-[0.2em] text-ink sm:text-lg'>
 						{COPY.reconnecting}
 					</p>
 				</div>
@@ -45,8 +44,7 @@ const QuizContent = () => {
 			<StageFrame>
 				{inLobby && <WaitingStart />}
 				{phase === GamePhase.Voting && (
-					<div className='relative flex h-full min-h-0 flex-col gap-2'>
-						<Countdown />
+					<div className='relative flex h-full min-h-0 flex-col gap-2 pt-8!'>
 						<Question />
 						<OptionArea />
 						<div className='flex h-14 shrink-0 flex-col items-center justify-center gap-1'>
@@ -55,7 +53,11 @@ const QuizContent = () => {
 						</div>
 					</div>
 				)}
-				{inSettle && <RevealOptions />}
+				{inSettle && (
+					<div className='flex h-full min-h-0 flex-col pt-8!'>
+						<RevealOptions />
+					</div>
+				)}
 				{inRanking && <PersonalResult />}
 			</StageFrame>
 		</>

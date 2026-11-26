@@ -1,19 +1,75 @@
-@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap);
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "poppins", sans-serif;
+	font-family: "Noto Serif TC", "Songti TC", serif;
 }
 
 body {
 	overflow-x: hidden;
 	overflow-y: hidden;
+	background: #fbf6ef;
+	color: #4e463f;
 }
 
 @media (max-width: 430px) {
 	body {
 		overflow-y: auto;
 	}
+}
+
+/* 手機橫向（高度約 500px 以內）才攔截，桌面寬視窗維持可操作 */
+.portrait-lock {
+	display: none;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+	.portrait-lock {
+		position: fixed;
+		inset: 0;
+		z-index: 80;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
+		padding: 24px;
+		background: #fbf6ef;
+		color: #9a7344;
+		text-align: center;
+	}
+
+	.portrait-lock p {
+		font-size: 22px;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+	}
+
+	.portrait-lock-phone {
+		position: relative;
+		width: 42px;
+		height: 68px;
+		border: 2px solid #9a7344;
+		border-radius: 8px;
+		animation: portrait-lock-tilt 1.8s ease-in-out infinite;
+	}
+
+	.portrait-lock-phone::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: 6px;
+		width: 12px;
+		height: 2px;
+		border-radius: 1px;
+		background: #9a7344;
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes portrait-lock-tilt {
+	0%, 18% { transform: rotate(90deg); }
+	45%, 100% { transform: rotate(0deg); }
 }
