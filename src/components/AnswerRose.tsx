@@ -18,7 +18,7 @@ const BLOOM_X = 0.5194;
 const BLOOM_Y = 0.3879;
 
 const FlowerVisual = ({ width, height }: { width: number, height: number }) => {
-	const displayW = Math.min(width * 0.5, 300) * 0.75;
+	const displayW = Math.min(width * 0.5, 300) * 0.75 * 1.5;
 	const displayH = displayW * (FLOWER_PIXEL_H / FLOWER_PIXEL_W);
 	const bloomX = displayW * BLOOM_X;
 	const bloomY = displayH * BLOOM_Y;

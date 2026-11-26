@@ -36,7 +36,7 @@ const RevealOptions = () => {
 	return (
 		<div className='flex min-h-0 flex-1 flex-col gap-4 pt-14!'>
 			<div className='min-h-0 flex-1'>
-				<div className='grid h-full w-full grid-cols-2 grid-rows-2 gap-2'>
+				<div className='grid h-full w-full grid-cols-2 grid-rows-2 gap-2 px-4!'>
 					{question.options.map((opt, index) => {
 						const isCorrect = revealed && answerReveal.correctAnswer === index;
 						const isSelected = submitted && selectedOption === index;
@@ -59,7 +59,7 @@ const RevealOptions = () => {
 										src={CORRECT_SRC}
 										alt='正確答案'
 										draggable={false}
-										className='pointer-events-none absolute left-1/2 top-0 z-40 w-[27%] max-w-[115px] -translate-x-1/2 -translate-y-[30%] select-none'
+										className='pointer-events-none absolute left-1/2 top-0 z-40 w-[60.75%] max-w-[260px] -translate-x-1/2 -translate-y-[30%] select-none'
 										initial={{ opacity: 0 }}
 										animate={{ opacity: 1 }}
 										transition={{ duration: 0.9, ease: 'easeOut', delay: ANSWER_ROSE_DURATION * 0.6 }}
@@ -70,7 +70,7 @@ const RevealOptions = () => {
 										src={CHOICE_SRC}
 										alt={COPY.yourPick}
 										draggable={false}
-										className='pointer-events-none absolute bottom-0 left-1/2 z-30 w-[42%] max-w-[140px] -translate-x-1/2 translate-y-[22%] select-none'
+										className='pointer-events-none absolute bottom-0 left-1/2 z-30 w-[63%] max-w-[210px] -translate-x-1/2 translate-y-[22%] select-none'
 										initial={{ opacity: 0 }}
 										animate={{ opacity: 1 }}
 										transition={{ duration: 0.45, ease: 'easeOut' }}

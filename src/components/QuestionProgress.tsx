@@ -22,7 +22,7 @@ const QuestionProgress = () => {
 	}
 
 	return (
-		<div className='pointer-events-none absolute inset-x-0 top-3 z-40 flex flex-col items-center gap-2'>
+		<div className='pointer-events-none absolute inset-x-0 top-10 z-40 flex flex-col items-center gap-2'>
 			{showProgress && (
 				<div className='text-2xl font-bold tracking-[0.12em] text-gold'>
 					{questionIndex}/{total}

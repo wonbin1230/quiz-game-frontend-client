@@ -14,7 +14,7 @@ const OptionArea = () => {
 
 	return (
 		<div className='min-h-0 flex-[4]'>
-			<div className='grid h-full w-full grid-cols-2 grid-rows-2 gap-2'>
+			<div className='grid h-full w-full grid-cols-2 grid-rows-2 gap-2 px-4!'>
 				{question.options.map((opt, index) => (
 					<Option
 						key={OPTION_LABELS[index] ?? index}
